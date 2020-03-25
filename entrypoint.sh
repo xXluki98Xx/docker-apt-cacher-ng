@@ -23,6 +23,13 @@ create_pid_dir
 create_cache_dir
 create_log_dir
 
+if [ ! -f "/etc/apt-cacher-ng/mirror_list.d/list.centos" ]; then
+    echo "generate new mirror lists"
+    cd apt-cacher-ng-remap
+    ./centos.sh; ./debian.sh; ./fedora.sh; ./fedora-epel.sh;
+    mv list.* /etc/apt-cacher-ng/mirror_list.d/
+fi
+
 # allow arguments to be passed to apt-cacher-ng
 if [[ ${1:0:1} = '-' ]]; then
   EXTRA_ARGS="$@"
