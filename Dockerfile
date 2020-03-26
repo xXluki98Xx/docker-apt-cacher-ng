@@ -25,7 +25,9 @@ RUN mkdir -p "/etc/apt-cacher-ng/mirror_list.d" \
     && bash debian.sh \
     && bash fedora.sh \
     && bash fedora-epel.sh \
-    && mv list.* /etc/apt-cacher-ng/mirror_list.d/
+    && mv list.* /etc/apt-cacher-ng/mirror_list.d/ \
+    && chmod -R 0755 /etc/apt-cacher-ng/mirror_list.d/ \
+    && chown -R ${APT_CACHER_NG_USER}:root /etc/apt-cacher-ng/mirror_list.d/
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 

@@ -28,6 +28,12 @@ if [ ! -f "/etc/apt-cacher-ng/mirror_list.d/list.centos" ]; then
     cd apt-cacher-ng-remap
     ./centos.sh; ./debian.sh; ./fedora.sh; ./fedora-epel.sh;
     mv list.* /etc/apt-cacher-ng/mirror_list.d/
+    chmod -R 0755 /etc/apt-cacher-ng/mirror_list.d/
+    chown -R ${APT_CACHER_NG_USER}:root /etc/apt-cacher-ng/mirror_list.d/
+else 
+    echo "change permissions"
+    chmod -R 0755 /etc/apt-cacher-ng/mirror_list.d/
+    chown -R ${APT_CACHER_NG_USER}:root /etc/apt-cacher-ng/mirror_list.d/
 fi
 
 # allow arguments to be passed to apt-cacher-ng
